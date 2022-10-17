@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 import sys
-import time
+import getopt
 
 #xls = pd.ExcelFile("./table_s1_meta_data.xlsx")
 #print ('Reading in Table S1')
@@ -16,8 +16,11 @@ s3 = pd.read_excel("./table_s3a_proteomic.xlsx", index_col=0)
 #print ('Reading in Table S3d')
 #s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
 
-type = sys.argv[1]
 sample_id = sys.argv[2]
+
+type = sys.argv[1]
+
+
 
 # Find Columns matching sample ID
 
@@ -37,25 +40,35 @@ else:
     sub_s3 = s3.loc[: , (s3 == sample_id).any()]
     s2 = sub_s2
     s3 = sub_s3
+
 # Separate NAT samples
   nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
   nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
-  print(nat_s2)
-  print(nat_s3)
+#  print(nat_s2)
+#  print(nat_s3)
+
 # Separate Tumor samples
   tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
   tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
-  print(tum_s2)
-  print(tum_s3)
-  
+#  print(tum_s2)
+#  print(tum_s3)
+
+#  Get median and mean for each row if type = term
+
+
+
+
+
 # Output to file
+import time
 timestr = time.strftime("%Y%m%d-%H%M%S")
-filename="results/tum_s2_"+timestr+".csv"
+os.system("mkdir results/"+timestr)
+filename="results/"+timestr+"/tum_s2_"+timestr+".csv"
 tum_s2.to_csv(filename)
-filename="results/nat_s2_"+timestr+".csv"
+filename="results/"+timestr+"/nat_s2_"+timestr+".csv"
 nat_s2.to_csv(filename)
-filename="results/tum_s3_"+timestr+".csv"
+filename="results/"+timestr+"/tum_s3_"+timestr+".csv"
 tum_s3.to_csv(filename)
-filename="results/nat_s3_"+timestr+".csv"
+filename="results/"+timestr+"/nat_s3_"+timestr+".csv"
 nat_s3.to_csv(filename)
 
