@@ -6,25 +6,18 @@ import os
 import sys
 import time
 
-
-xls = pd.ExcelFile("./table_s1_meta_data.xlsx")
-print ('Reading in Table S1')
-s1 = pd.read_excel(xls,'Annotions_S1A')
+#xls = pd.ExcelFile("./table_s1_meta_data.xlsx")
+#print ('Reading in Table S1')
+#s1 = pd.read_excel(xls,'Annotions_S1A')
 print ('Reading in Table S2')
 s2 = pd.read_excel("./table_s2d_transcriptomic.xlsx", index_col=0)
 print ('Reading in Table S3')
 s3 = pd.read_excel("./table_s3a_proteomic.xlsx", index_col=0)
-print ('Reading in Table S3d')
-s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
-  
-#sample_id=sys.argv[1]
+#print ('Reading in Table S3d')
+#s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
 
-type = id
-#type = terms
-
-args = vietnam smoker
-
-sample_id = "C3N.01799"
+type = sys.argv[1]
+sample_id = sys.argv[2]
 
 # Find Columns matching sample ID
 
@@ -34,21 +27,27 @@ if type == "id":
   nat_id = sample_id+".N"
   nat_s2 = s2.loc[: , (s2 == nat_id).any()]
   nat_s3 = s3.loc[: , (s3 == nat_id).any()]
+  print(nat_s2)
+  print(nat_s3)
 else:
   for i in range(2, len(sys.argv)):
     sample_id=sys.argv[i]
-    print ('Sample-ID', sample_id) 
+    print ('Sample-ID', sample_id)
     sub_s2 = s2.loc[: , (s2 == sample_id).any()]
     sub_s3 = s3.loc[: , (s3 == sample_id).any()]
     s2 = sub_s2
     s3 = sub_s3
 # Separate NAT samples
-    nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
-    nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
+  nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
+  nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
+  print(nat_s2)
+  print(nat_s3)
 # Separate Tumor samples
-    tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
-    tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
-
+  tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
+  tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
+  print(tum_s2)
+  print(tum_s3)
+  
 # Output to file
 timestr = time.strftime("%Y%m%d-%H%M%S")
 filename="results/tum_s2_"+timestr+".csv"
@@ -59,4 +58,4 @@ filename="results/tum_s3_"+timestr+".csv"
 tum_s3.to_csv(filename)
 filename="results/nat_s3_"+timestr+".csv"
 nat_s3.to_csv(filename)
- 
+
