@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import pandas as pd
+import numpy as np
+import os
+import sys
+
+xls = pd.ExcelFile("./table_s1_meta_data.xlsx")
+print ('Reading in Table S1')
+s1 = pd.read_excel(xls,'Annotions_S1A')
+print ('Reading in Table S2')
+s2 = pd.read_excel("./table_s2d_transcriptomic.xlsx", index_col=0)
+print ('Reading in Table S3')
+s3 = pd.read_excel("./table_s3a_proteomic.xlsx", index_col=0)
+print ('Reading in Table S3d')
+s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
+ 
+ 
+
+sample_id=sys.argv[1]
+print ('Sample-ID', sample_id)
