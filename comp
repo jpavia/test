@@ -43,11 +43,11 @@ else:
     s2 = sub_s2
     s3 = sub_s3
 # Separate NAT samples
-  nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
-  nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
+    nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
+    nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
 # Separate Tumor samples
-  tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
-  tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
+    tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
+    tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
 
 # Output to file
 timestr = time.strftime("%Y%m%d-%H%M%S")
