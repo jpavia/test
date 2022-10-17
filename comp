@@ -4,7 +4,8 @@ import pandas as pd
 import numpy as np
 import os
 import sys
-import getopt
+import time
+
 
 xls = pd.ExcelFile("./table_s1_meta_data.xlsx")
 print ('Reading in Table S1')
@@ -49,9 +50,7 @@ else:
   tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
 
 # Output to file
-import time
 timestr = time.strftime("%Y%m%d-%H%M%S")
-print timestr
 filename="results/tum_s2_"+timestr+".csv"
 tum_s2.to_csv(filename)
 filename="results/nat_s2_"+timestr+".csv"
