@@ -39,7 +39,7 @@ else:
     sample_id=sys.argv[i]
     print ('Sample-ID', sample_id) 
     sub_s2 = s2.loc[: , (s2 == sample_id).any()]
-    sub_s2 = s3.loc[: , (s3 == sample_id).any()]
+    sub_s3 = s3.loc[: , (s3 == sample_id).any()]
     s2 = sub_s2
     s3 = sub_s3
 # Separate NAT samples
