@@ -15,8 +15,14 @@ s3 = pd.read_excel("./table_s3a_proteomic.xlsx", index_col=0)
 print ('Reading in Table S3d')
 s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
   
-type_query=sys.argv[1]
-sample_id=sys.argv[2]
+#sample_id=sys.argv[1]
+
+type = id
+#type = terms
+
+args = vietnam smoker
+
+sample_id = "C3N.01799"
 
 print ('Sample-ID', sample_id)
 
