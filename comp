@@ -14,8 +14,26 @@ print ('Reading in Table S3')
 s3 = pd.read_excel("./table_s3a_proteomic.xlsx", index_col=0)
 print ('Reading in Table S3d')
 s3d = pd.read_excel("./table_s3d_proteomic.xlsx", index_col=0)
- 
- 
+  
+type_query=sys.argv[1]
+sample_id=sys.argv[2]
 
-sample_id=sys.argv[1]
 print ('Sample-ID', sample_id)
+
+# Find Columns matching sample ID 
+ 
+sub_s2 = s2.loc[: , (s2 == sample_id).any()]
+sub_s3 = s3.loc[: , (s3 == sample_id).any()]
+
+# Separate NAT samples
+nat_s2 = sub_s2.loc[: , (sub_s2 == "NAT").any()]
+nat_s3 = sub_s3.loc[: , (sub_s3 == "NAT").any()]
+# Separate Tumor samples
+tum_s2 = sub_s2.loc[: , (sub_s2 == "Tumor").any()]
+tum_s3 = sub_s3.loc[: , (sub_s3 == "Tumor").any()]
+
+tum_s2.describe
+nat_s2.describe
+tum_s3.describe
+nat_s3.describe
+
