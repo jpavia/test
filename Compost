@@ -1,0 +1,29 @@
+#/bin/bash
+
+E_ARGERROR=85
+MINPARAMS=3
+
+if [ $# -lt "$MINPARAMS" ] 
+then 
+   echo "!ERROR! Missing host parameter"
+   echo "
+Usage: `basename $0`  file search_term function
+
+`basename $0` - computes function for selected row 
+
+Example:
+     :~> `basename $0` data.csv SAMD11 mean
+
+"
+   exit $E_ARGERROR
+fi
+
+file=$1
+term=$2
+func=$3
+
+match=`grep $term $file`
+for line in match
+  set $line
+  echo $line
+  echo $1
